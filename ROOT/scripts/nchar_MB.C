@@ -30,6 +30,7 @@ void nchar_MB()
 	TFile *filePY_MB_all = TFile::Open("../data/PY_MinBias_all.root");
 	TFile *filePY_MB_ND = TFile::Open("../data/PY_MinBias_ND.root");
 	TFile *filePY_MB_all_clear = TFile::Open("../data/PY_MinBias_all_clear.root");
+	TFile *filePY_MB_all_CR1 = TFile::Open("../data/PY_MinBias_all_CR1.root");
 	TFile *fileHE_MB_all = TFile::Open("../data/HE_MinBias_all.root");
 	TFile *fileHE_MB_ND = TFile::Open("../data/HE_MinBias_ND.root");
 
@@ -37,6 +38,7 @@ void nchar_MB()
 	TTreeReader readPY_MB_all("tree", filePY_MB_all);
 	TTreeReader readPY_MB_ND("tree", filePY_MB_ND);
 	TTreeReader readPY_MB_all_clear("tree", filePY_MB_all_clear);
+	TTreeReader readPY_MB_all_CR1("tree", filePY_MB_all_CR1);
 	TTreeReader readHE_MB_all("tree", fileHE_MB_all);
 	TTreeReader readHE_MB_ND("tree", fileHE_MB_ND);
 
@@ -44,6 +46,7 @@ void nchar_MB()
 	TTreeReaderValue<Int_t> PY_nChar_all(readPY_MB_all, "nChar");
 	TTreeReaderValue<Int_t> PY_nChar_ND(readPY_MB_ND, "nChar");
 	TTreeReaderValue<Int_t> PY_nChar_all_clear(readPY_MB_all_clear, "nChar");
+	TTreeReaderValue<Int_t> PY_nChar_all_CR1(readPY_MB_all_CR1, "nChar");
 	TTreeReaderValue<Int_t> HE_nChar_all(readHE_MB_all, "nChar");
 	TTreeReaderValue<Int_t> HE_nChar_ND(readHE_MB_ND, "nChar");
 
@@ -91,6 +94,21 @@ void nchar_MB()
 
 	// Normalise PYTHIA all histogram default
 	PY_all_clear->Scale(1/(PY_all_clear->GetEntries()));
+
+	// Load nChar values for PYTHIA all with colour reconnect 1
+	TH1D *PY_all_CR1 = new TH1D("PY_all_CR1", "", 70, 0, 70);
+	while(readPY_MB_all_CR1.Next())
+	{
+		if (*PY_nChar_all_CR1 == 0)
+			continue;
+		else
+		{
+			PY_all_CR1->Fill(*PY_nChar_all_CR1);
+		}
+	}
+
+	// Normalise PYTHIA all histogram with colour reconnect 1
+	PY_all_CR1->Scale(1/(PY_all_CR1->GetEntries()));
 
 	// Load nChar for Herwig all
 	TH1D *HE_all = new TH1D("HE_all", "", 70, 0, 70);
@@ -164,6 +182,16 @@ void nchar_MB()
 
 	PY_all_clear->SetStats(kFALSE);
 
+	// Format PYTHIA all default hist.
+	PY_all_CR1->SetMarkerStyle(20);
+	PY_all_CR1->SetMarkerSize(.75);
+	PY_all_CR1->SetMarkerColor(kOrange);
+	PY_all_CR1->SetLineColor(kOrange);
+
+	PY_all_CR1->GetYaxis()->SetRangeUser(0.0001,0.5);
+
+	PY_all_CR1->SetStats(kFALSE);
+
 	// Format Herwig all hist.
 	HE_all->SetMarkerStyle(20);
 	HE_all->SetMarkerSize(.75);
@@ -189,6 +217,7 @@ void nchar_MB()
 	PY_all->Draw("P");
 	PY_ND->Draw("P same");
 	PY_all_clear->Draw("P same");
+	PY_all_CR1->Draw("P same");
 	HE_all->Draw("P same");
 	HE_ND->Draw("P same");
 	
@@ -199,6 +228,7 @@ void nchar_MB()
 	leg->AddEntry(PY_all, "PYTHIA 8, all", "p");
 	leg->AddEntry(PY_ND, "PYTHIA 8, non-diffractive", "p");
 	leg->AddEntry(PY_all_clear, "PYTHIA 8, all, default", "p");
+	leg->AddEntry(PY_all_CR1, "PYTHIA 8, all, CR1", "p");
 	leg->AddEntry(HE_all, "Herwig 7, all", "p");
 	leg->AddEntry(HE_ND, "Herwig 7, non-diffractive", "p");
 
