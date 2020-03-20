@@ -1,0 +1,51 @@
+#------------------------------------------------------------------------------
+# Parameters that need to be set by whoever runs it.
+# Documentation: <pyhiadir>/htmldoc/MainProgramSettings.html
+#------------------------------------------------------------------------------
+Main:numberOfEvents = 100000       ! number of events to generate
+# Main:numberToList = 0              ! number of events to print
+# Main:timesToShow = 100             ! show how far along run is this many times
+Main:timesAllowErrors = 100000        ! abort run after this many flawed events
+# Main:showChangedSettings = on      ! print changed flags/modes/parameters
+# Main:showAllSettings = on          ! print all flags/modes/parameters
+# Main:showAllStatistics = on        ! print statistics at the end
+
+#------------------------------------------------------------------------------
+# Colliding beams and center-of-mass energy
+# Documentation: <pyhiadir>/htmldoc/BeamParameters.html
+#------------------------------------------------------------------------------
+Beams:idA = 2212                  ! proton
+Beams:idB = 2212                  ! proton
+Beams:eCM = 500.                  ! RHIC nominal (GeV)
+
+#------------------------------------------------------------------------------
+# Process Selection
+#------------------------------------------------------------------------------
+# Minimum Bias
+SoftQCD:all = on
+
+#------------------------------------------------------------------------------
+# Random Number
+# Documentation: <pyhiadir>/htmldoc/RandomNumberSeed.html
+#------------------------------------------------------------------------------
+Random:setSeed = on
+Random:seed = 0
+
+#------------------------------------------------------------------------------
+# PDF Selection:
+# Documentation: <pyhiadir>/htmldoc/PDFSelection.html
+#------------------------------------------------------------------------------
+PDF:extrapolate = on
+PDF:pSet = LHAPDF6:MRSTMCal/0
+
+#------------------------------------------------------------------------------
+# Settings for the event generation process in the Pythia8 library
+# Documentation: <pyhiadir>/htmldoc/MasterSwitches.html
+# Documentation: <pyhiadir>/htmldoc/MultipleInteractions.html
+#------------------------------------------------------------------------------
+#PartonLevel:MPI = on             ! multiple interactions
+#PartonLevel:ISR = on             ! initial-state radiation 
+#BeamRemnants:primordialKT = on   ! primordial kt
+#PartonLevel:FSR = on             ! final-state radiation
+
+# EOF
