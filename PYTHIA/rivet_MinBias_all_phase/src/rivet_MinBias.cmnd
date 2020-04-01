@@ -1,0 +1,52 @@
+#------------------------------------------------------------------------------
+# Documentation: <pyhiadir>/htmldoc/MainProgramSettings.html
+#------------------------------------------------------------------------------
+Main:numberOfEvents = 50000       ! number of events to generate
+# Main:numberToList = 0              ! number of events to print
+# Main:timesToShow = 100             ! show how far along run is this many times
+Main:timesAllowErrors = 50000        ! abort run after this many flawed events
+# Main:showChangedSettings = on      ! print changed flags/modes/parameters
+# Main:showAllSettings = on          ! print all flags/modes/parameters
+# Main:showAllStatistics = on        ! print statistics at the end
+
+#------------------------------------------------------------------------------
+# Colliding beams and center-of-mass energy
+# Documentation: <pyhiadir>/htmldoc/BeamParameters.html
+#------------------------------------------------------------------------------
+Beams:idA = 2212                  ! proton
+Beams:idB = 2212                  ! proton
+Beams:eCM = 900.                  ! RHIC nominal (GeV)
+
+#------------------------------------------------------------------------------
+# Process Selection
+# Documentation: <pyhiadir>/htmldoc/QCDProcesses.html
+# Documentation: <pyhiadir>/htmldoc/OniaProcesses.html
+#------------------------------------------------------------------------------
+SoftQCD:all = on
+
+#------------------------------------------------------------------------------
+# Random Number
+# Documentation: <pyhiadir>/htmldoc/RandomNumberSeed.html
+#------------------------------------------------------------------------------
+Random:setSeed = on
+Random:seed = 0
+
+#------------------------------------------------------------------------------
+# PDF Selection:
+# Documentation: <pyhiadir>/htmldoc/PDFSelection.html
+#------------------------------------------------------------------------------
+PDF:extrapolate = on
+PDF:pSet = LHAPDF6:MRSTMCal/0
+
+#------------------------------------------------------------------------------
+# Manipulating phase space - Miro's suggestion
+#------------------------------------------------------------------------------
+# Use this for hard leading-jets in a certain pT window
+PhaseSpace:pTHatMin = 0   # min pT
+PhaseSpace:pTHatMax = 900   # max pT
+
+# Use this for hard leading-jets in a certain mHat window
+PhaseSpace:mHatMin = 0   # min mHat
+PhaseSpace:mHatMax = 900   # max mHat
+
+# EOF
